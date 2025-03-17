@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HR Employee</title>
+    <style>
+        body {
+            display: flex;
+            margin: 0;
+            height: 100vh;
+        }
+        a:hover {
+            background-color: #c59c9c;
+        }
+        #page1 {
+            width: 20%;
+            background-color: #f4f4f4;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        #page2 {
+            width: 80%;
+            background-color: #fff;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        button {
+            display: block;
+            margin: 10px 0;
+            padding: 10px;
+            width: 200px;
+            border: 1px solid #cad4c4;
+            border-radius: 5px;          
+        }
+        .hidden {
+            display: none;
+        }
+        input, select {
+            width: 80%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #fcadad;
+            border-radius: 5px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        .action-buttons button {
+            margin: 0 5px;
+        }
+    </style>
+</head>
+<body>
+    <div id="page1">
+        <h2>HR Employee Information</h2>
+        <button onclick="showStylePage()">Employee Setup</button>
+        <button onclick="showColorPage()">Attendence</button>
+        <button onclick="showSizePage()">Payment</button>      
+    </div>
+    <div id="page2">
+        <!-- Style Page -->
+        <div id="stylePage" class="hidden">
+        <!-- Search -->
+        <h2>Search Employee Information</h2>
+        <input type="text" id="searchStyle" placeholder="Search by employee name..." oninput="searchProduct()">
+        <button type="button" onclick="exportToExcel()">Export to Excel</button>
+        <h2>Create New Employee</h2>       
+        <!-- Create -->
+        <button onclick="window.location.href = 'form simple.html'" style="background-color: rgb(69, 187, 69);">Create</button>
+
+        <!-- Result -->
+        <h2>Employee Details</h2>
+        <table id="productTable">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>ID </th>
+                    <th>Join Date</th>
+                    <th>Department</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- fill it -->
+            </tbody>
+        </table>
+    </div>
+<!--   
+      Color Page 
+        <div id="colorPage" class="hidden">
+            <h2>Color Page</h2>
+            <button onclick="createColor()">Create</button>
+            <input type="text" id="colorName" placeholder="Color Name">
+        </div>
+    -->
+
+
+        <!-- Size Page -->
+        <div id="sizePage" class="hidden">
+        <!-- Search -->
+        <h2>Search Employee Information</h2>
+        <input type="text" id="searchStyle" placeholder="Search by employee name..." oninput="searchProduct()">
+        <button type="button" onclick="exportToExcel()">Export to Excel</button>
+        <h2>Create New Employee Payment</h2>       
+        <!-- Create -->
+        <button onclick="window.location.href = 'create.html'" style="background-color: rgb(69, 187, 69);">Create</button>
+
+        <!-- Result -->
+        <h2>Employee Payment List</h2>
+        <table id="productTable">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>ID </th>
+                    <th>Join Date</th>
+                    <th>Department</th>
+                    <th>Payment Amount</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- fill it -->
+            </tbody>
+        </table>
+    </div>
+
+    </div>
+
+    <script>
+        // Function to show Style Page
+        function showStylePage() {
+            document.getElementById('stylePage').classList.remove('hidden');
+            document.getElementById('sizePage').classList.add('hidden');
+            document.getElementById('colorPage').classList.add('hidden');
+        }
+
+        // Function to show Color Page
+        function showColorPage() {
+            document.getElementById('colorPage').classList.remove('hidden');
+            document.getElementById('sizePage').classList.add('hidden');
+            document.getElementById('stylePage').classList.add('hidden');
+        }
+
+                // Function to show Size Page
+                function showSizePage() {
+            document.getElementById('sizePage').classList.remove('hidden');
+            document.getElementById('stylePage').classList.add('hidden');
+            document.getElementById('colorPage').classList.add('hidden');
+        }
+
+        function exportToExcel() {
+            if (allData.length === 0) {
+                alert("No data to export!"); 
+                return;
+            }
+
+            const ws = XLSX.utils.json_to_sheet(allData); 
+            const wb = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(wb, ws, "EmployeeData");
+            XLSX.writeFile(wb, "HR_Employee_Information.xlsx"); 
+        }
+    </script>
+</body>
+</html>

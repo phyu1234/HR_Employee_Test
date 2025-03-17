@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form Page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    form {
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    input, textarea, button {
+      display: block;
+      width: 100%;
+      margin: 10px 0;
+      padding: 10px;
+    }
+    .success-message {
+      text-align: center;
+      color: green;
+      font-size: 1.2em;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <form id="dataForm">
+    <h2>Employee Information</h2>
+    <label for="name">Name:</label>
+    <input type="text" id="name" required>
+    
+    <label for="age">Age:</label>
+    <input type="number" id="age" required>
+    
+    <label for="address">Address:</label>
+    <textarea id="address" rows="3" required></textarea>
+    
+    <label for="education">Education:</label>
+    <input type="text" id="education" required>
+    
+    <label for="nationality">Nationality:</label>
+    <input type="text" id="nationality" required>
+    
+    <label for="skill">Skill:</label>
+    <input type="text" id="skill" required>
+    
+    <label for="language">Languages Spoken:</label>
+    <input type="text" id="language" required>
+    
+    <label for="joinDate">Join Date:</label>
+    <input type="date" id="joinDate" required>
+    
+    <button type="submit">Submit</button>
+  </form>
+  
+  <div id="message" class="success-message"></div>
+
+  <script>
+    const form = document.getElementById('dataForm');
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+      
+      const formData = {
+        name: document.getElementById('name').value,
+        age: document.getElementById('age').value,
+        address: document.getElementById('address').value,
+        education: document.getElementById('education').value,
+        nationality: document.getElementById('nationality').value,
+        skill: document.getElementById('skill').value,
+        language: document.getElementById('language').value,
+        birthday: document.getElementById('joinDate').value
+      };
+
+      // Save data to localStorage
+      const storedData = JSON.parse(localStorage.getItem('formData')) || [];
+      storedData.push(formData);
+      localStorage.setItem('formData', JSON.stringify(storedData));
+
+      // Show success message
+      document.getElementById('message').textContent = 'Form successfully submitted!';
+      
+      // Redirect to the results page after 2 seconds
+      setTimeout(() => {
+        window.location.href = 'hr employee.html';
+      }, 2000);
+    });
+  </script>
+</body>
+</html>
